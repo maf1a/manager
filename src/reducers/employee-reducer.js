@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
-  console.log(payload);
+  console.log(type, payload, 'suka');
   switch (type) {
     case EMPLOYEES_FETCH_SUCCESS:
       return payload;

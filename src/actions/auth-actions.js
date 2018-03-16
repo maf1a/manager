@@ -44,12 +44,12 @@ const loginUserSuccess = (dispatch, user) => {
   firebase.database().ref(`/users/${currentUser.uid}/employees`)
     .on('value', snapshot => {
       const snap = snapshot.val();
-      const emp = '';
-      if (snap) {
-        const emp = Object.keys(snap).map((uid) => {
+      var emp = '';
+      // if (typeof snap === 'object') {
+        emp = Object.keys(snap).map((uid) => {
           return { ...snap[uid], uid }
         });
-      };
+      // };
       dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: emp });
       dispatch({ type: LOGIN_USER, payload: false});
       dispatch({ type: LOGIN_USER_SUCCESS, payload: user});

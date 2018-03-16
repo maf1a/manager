@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import * as actions from '../actions/employee-action';
 import { Text, View, FlatList } from 'react-native';
+import ListItem from './list-item';
 
-class EmployeeCreate extends Component {
+class EmployeeList extends Component {
 
-  componentDidMount() {
-
+  renderList(item) {
+    return(
+      <ListItem employee={item}/>
+    );
   }
 
   render() {
     return(
       <View>
-        {this.props.list ? (<FlatList
-          data={this.props.list}
-          renderItem={({item}) => <Text>{item.name}</Text>}
-        />) : (<Text>No employees found</Text>)}
+        {this.props.list
+          ?
+          (<FlatList
+            data={this.props.list}
+            renderItem={({item}) => this.renderList(item)}
+          />)
+          :
+          (<Text>No employees</Text>)}
       </View>
     );
   }
@@ -25,4 +31,4 @@ mapStateToProps = state => {
   return { list: state.employees }
 }
 
-export default connect(mapStateToProps, null)(EmployeeCreate);
+export default connect(mapStateToProps, null)(EmployeeList);
